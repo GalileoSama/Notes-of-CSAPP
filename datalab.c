@@ -58,7 +58,7 @@ int isTmax(int x) {
     int t2 = x + 1 != 0;
     return c&t2;
 }
-/*
+/* 未验证
  * allOddBits - return 1 if all odd-numbered bits in word set to 1
  *   where bits are numbered from 0 (least significant) to 31 (most significant)
  *   Examples allOddBits(0xFFFFFFFD) = 0, allOddBits(0xAAAAAAAA) = 1
@@ -67,7 +67,7 @@ int isTmax(int x) {
  *   Rating: 2
  */
 int allOddBits(int x) {
-    return 2;
+    return !((x+0x55555555)+1);
 }
 /*
  * negate - return -x
@@ -77,7 +77,47 @@ int allOddBits(int x) {
  *   Rating: 2
  */
 int negate(int x) {
-    return 2;
+    return ~x+1;
+}
+
+//3
+/* （收益匪浅）思想：利用相加的两个数会否溢出到符号位，来设定上下界（略抽象）。
+ *  上界：高于上界的数与上界相机会溢出到符号位，使符号位y由0变为1；
+ *  下界：低于下界的数与下界相加不会溢出到符号位，符号位本来就为1，不变。
+ * isAsciiDigit - return 1 if 0x30 <= x <= 0x39 (ASCII codes for characters '0' to '9')
+ *   Example: isAsciiDigit(0x35) = 1.
+ *            isAsciiDigit(0x3a) = 0.
+ *            isAsciiDigit(0x05) = 0.
+ *   Legal ops: ! ~ & ^ | + << >>
+ *   Max ops: 15
+ *   Rating: 3
+ */
+int isAsciiDigit(int x) {
+    int sign = 1 << 31;
+    int upperBound = ~(sign|0x39);
+    int lowerBound = ~0x30;
+    
+  return 2;
+}
+/* 
+ * conditional - same as x ? y : z 
+ *   Example: conditional(2,4,5) = 4
+ *   Legal ops: ! ~ & ^ | + << >>
+ *   Max ops: 16
+ *   Rating: 3
+ */
+int conditional(int x, int y, int z) {
+  return 2;
+}
+/* 
+ * isLessOrEqual - if x <= y  then return 1, else return 0 
+ *   Example: isLessOrEqual(4,5) = 1.
+ *   Legal ops: ! ~ & ^ | + << >>
+ *   Max ops: 24
+ *   Rating: 3
+ */
+int isLessOrEqual(int x, int y) {
+  return 2;
 }
 /**test**/
 int main() {
