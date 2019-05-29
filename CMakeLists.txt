@@ -3,4 +3,4 @@ project(CSAPP C)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(CSAPP datalab.c)
+add_executable(CSAPP "data lab/datalab.c")
